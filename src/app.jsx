@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import { HomePage, ProductsPage } from "./pages";
+import Footer from "./components/footer";
 
 export default function App() {
   return (
@@ -8,6 +9,7 @@ export default function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/products" element={<ProductsPage />} />
       </Routes>
+      <Footer />
     </>
   );
 }

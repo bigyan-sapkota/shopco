@@ -5,7 +5,7 @@ export default function HomePage() {
   return (
     <main>
       <HomeHero />
-      <div className="h-[5000vh]"></div>
+      <div className="h-[50vh]"></div>
     </main>
   );
 }
