@@ -1,6 +1,3 @@
-import React from "react";
-import Button from "../../ui/button";
-import CustomButton from "../../ui/button";
 import clsx from "clsx";
 import CountUp from "react-countup";
 
@@ -68,7 +65,7 @@ const Stats = ({ className }) => {
     >
       {statsData.map((stat) => (
         <div
-          key={stat}
+          key={stat.id}
           className="border-secondary-text px-8 lg:border-l lg:first:border-l-0"
         >
           <h2 className="flex justify-center gap-1 text-center text-2xl lg:text-4xl">
