@@ -1,19 +1,24 @@
-import { Route, Routes } from "react-router-dom";
-import { HomePage, ProductsPage } from "./pages";
+import { Route, Routes, useLocation } from "react-router-dom";
+import { HomePage, LoginPage, ProductsPage, RegisterPage } from "./pages";
 import DashboardHomePage from "./pages/dashboard/home-page";
 import Footer from "./components/footer";
 import Navbar from "./components/navbar";
 
 export default function App() {
+  const location = useLocation();
+  const isDashboard = location.pathname.startsWith("/dashboard");
+
   return (
     <>
-      <Navbar />
+      {!isDashboard && <Navbar />}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/products" element={<ProductsPage />} />
         <Route path="/dashboard" element={<DashboardHomePage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
       </Routes>
-      <Footer />
+      {!isDashboard && <Footer />}
     </>
   );
 }
