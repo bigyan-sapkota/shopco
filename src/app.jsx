@@ -3,6 +3,7 @@ import { HomePage, LoginPage, ProductsPage, RegisterPage } from "./pages";
 import DashboardHomePage from "./pages/dashboard/home-page";
 import Footer from "./components/footer";
 import Navbar from "./components/navbar";
+import ProductDetailsPage from "./pages/product-details-page";
 
 export default function App() {
   const location = useLocation();
@@ -13,8 +14,8 @@ export default function App() {
       {!isDashboard && <Navbar />}
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/products" element={<ProductsPage />} />
         <Route path="/dashboard" element={<DashboardHomePage />} />
+        <Route path="/products" element={<ProductDetailsPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
       </Routes>
