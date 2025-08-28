@@ -1,3 +1,5 @@
+export const backendUrl = "https://online-grocery-server.vercel.app/api";
+
 export const companyLinks = [
   { id: 1, text: "About", route: "/about" },
   { id: 2, text: "Features", route: "/features" },
