@@ -14,8 +14,9 @@ export default function App() {
       {!isDashboard && <Navbar />}
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/products" element={<ProductsPage />} />
         <Route path="/dashboard" element={<DashboardHomePage />} />
-        <Route path="/products" element={<ProductDetailsPage />} />
+        <Route path="/products/1" element={<ProductDetailsPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
       </Routes>

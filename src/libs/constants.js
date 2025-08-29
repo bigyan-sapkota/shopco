@@ -27,3 +27,10 @@ export const resourcesLinks = [
   { id: 3, text: "How to - Blog", route: "/how-to-blog" },
   { id: 4, text: "Youtube Playlist", route: "/youtube-playlist" },
 ];
+
+export const defaultProductFilterOptions = {
+  category: "",
+  sort: "recent",
+  price_gte: "",
+  price_lte: "",
+};

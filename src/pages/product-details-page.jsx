@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { Link } from "react-router-dom";
+import Stars from "../components/layouts/stars";
+import useProduct from "../queries/use-product";
 
 const tabList = [
   { value: "product-details", text: "Product Details" },
@@ -38,6 +40,7 @@ const product = {
 
 export default function ProductDetailsPage() {
   const [isActiveTab, setIsActiveTab] = useState("product-details");
+  useProduct("tqd9wz6fougfsju18cvxooff");
 
   return (
     <main className="max-width padding-x padding-y">
@@ -55,7 +58,7 @@ export default function ProductDetailsPage() {
         </div>
         <div className="w-1/2">
           <h1 className="font-bold">{product.title}</h1>
-          {/* rating here */}
+          <Stars number={4} className="mt-1" />
           <h4 className="mt-2">NPR.{product.price}</h4>
           <p className="mt-3 text-gray-600">{product.description}</p>
         </div>
