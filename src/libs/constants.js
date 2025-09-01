@@ -1,5 +1,15 @@
 export const backendUrl = "https://online-grocery-server.vercel.app/api";
 
+export const imageBbKey = import.meta.env.VITE_IMAGEBB_KEY;
+
+export const MAX_FILE_SIZE = 2 * 1024 * 1024;
+export const ACCEPTED_IMAGE_TYPES = [
+  "image/jpeg",
+  "image/jpg",
+  "image/png",
+  "image/webp",
+];
+
 export const companyLinks = [
   { id: 1, text: "About", route: "/about" },
   { id: 2, text: "Features", route: "/features" },

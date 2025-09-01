@@ -16,7 +16,7 @@ export default function InputField({
       <label className="font-semibold capitalize">{labelFor} : </label>
       <input
         type={type}
-        className="rounded border border-gray-700 p-2"
+        className="rounded border border-gray-300 p-2"
         {...register(field)}
       />
       {decorator && decorator}
