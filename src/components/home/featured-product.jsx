@@ -3,6 +3,7 @@ import ProductCard from "../cards/product-card";
 
 export default function FeaturedProduct() {
   const { data: products, isLoading, isError } = useProducts();
+
   return (
     <section className="max-width padding-x margin-y">
       <h2 className="mb-8 text-center">Featured Product</h2>
