@@ -10,7 +10,7 @@ export default function Navbar() {
   const [isNavBarVisible, setIsNavBarVisible] = useState(false);
 
   return (
-    <nav className="max-width padding-x flex h-20 items-center">
+    <nav className="max-width padding-x hidden h-20 items-center lg:flex">
       <div className="flex w-full items-center justify-between">
         <div className="flex gap-4">
           {/* hamburger */}

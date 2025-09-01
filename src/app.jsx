@@ -4,6 +4,7 @@ import DashboardHomePage from "./pages/dashboard/home-page";
 import Footer from "./components/footer";
 import Navbar from "./components/navbar";
 import ProductDetailsPage from "./pages/product-details-page";
+import { Toaster } from "sonner";
 
 export default function App() {
   const location = useLocation();
@@ -20,6 +21,7 @@ export default function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
       </Routes>
+      <Toaster />
       {!isDashboard && <Footer />}
     </>
   );
