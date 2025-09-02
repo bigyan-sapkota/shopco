@@ -7,13 +7,12 @@ export function makeQueryClient() {
         refetchOnMount: false,
         refetchOnWindowFocus: false,
         retry: false,
-        gcTime: 3 * 60000,
+        gcTime: 3 * 60 * 1000,
         refetchIntervalInBackground: false,
-        maxPages: 10,
       },
       mutations: {
         retry: false,
-        gcTime: 30000,
+        gcTime: 30 * 1000,
       },
     },
   });

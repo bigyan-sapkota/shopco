@@ -8,7 +8,7 @@ export const useProfile = () => {
     queryKey: profileKey,
     queryFn: fetchProfile,
     refetchOnWindowFocus: true,
-    refetchInterval: 60000,
+    refetchInterval: 60 * 1000,
     throwOnError(err, query) {
       query.setData(null);
       return false;
@@ -17,9 +17,12 @@ export const useProfile = () => {
 };
 
 export const fetchProfile = async () => {
-  const { data } = await apiClient.get("/users/profile", {
-    withCredentials: true,
-  });
-
-  return data.user;
+  try {
+    const response = await apiClient.get("/users/profile", {
+      withCredentials: true,
+    });
+    return response.data.user;
+  } catch (error) {
+    throw new Error(error.message || "Something went wrong, try again later!");
+  }
 };

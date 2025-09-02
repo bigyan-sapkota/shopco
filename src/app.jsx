@@ -8,6 +8,7 @@ import ProductDetailsPage from "./pages/product-details-page";
 
 export default function App() {
   const location = useLocation();
+  console.log("cookie", document.cookie);
   const isDashboard = location.pathname.startsWith("/dashboard");
   return (
     <>
