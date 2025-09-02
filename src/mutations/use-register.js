@@ -42,7 +42,9 @@ export const registerUser = async (data) => {
       image: imageUrl,
     };
 
-    const response = await apiClient.post("/auth/register", payload);
+    const response = await apiClient.post("/auth/register", payload, {
+      withCredentials: true,
+    });
     return response.data.user;
   } catch (error) {
     throw new Error(error.message || "Something went wrong, try again later.");

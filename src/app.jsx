@@ -1,15 +1,14 @@
 import { Route, Routes, useLocation } from "react-router-dom";
-import { HomePage, LoginPage, ProductsPage, RegisterPage } from "./pages";
-import DashboardHomePage from "./pages/dashboard/home-page";
+import { Toaster } from "sonner";
 import Footer from "./components/footer";
 import Navbar from "./components/navbar";
+import { HomePage, LoginPage, ProductsPage, RegisterPage } from "./pages";
+import DashboardHomePage from "./pages/dashboard/home-page";
 import ProductDetailsPage from "./pages/product-details-page";
-import { Toaster } from "sonner";
 
 export default function App() {
   const location = useLocation();
   const isDashboard = location.pathname.startsWith("/dashboard");
-
   return (
     <>
       {!isDashboard && <Navbar />}

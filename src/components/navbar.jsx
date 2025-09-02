@@ -5,6 +5,7 @@ import { FaRegCircleUser } from "react-icons/fa6";
 import { IoSearchOutline } from "react-icons/io5";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { useState } from "react";
+import UserMenu from "./menus/user-menu";
 
 export default function Navbar() {
   const [isNavBarVisible, setIsNavBarVisible] = useState(false);
@@ -41,10 +42,13 @@ export default function Navbar() {
             size={28}
             className="custom-transition cursor-pointer hover:text-blue-600"
           />
-          <FaRegCircleUser
-            size={24}
-            className="custom-transition cursor-pointer hover:text-blue-600"
-          />
+
+          <UserMenu>
+            <FaRegCircleUser
+              size={24}
+              className="custom-transition cursor-pointer hover:text-blue-600"
+            />
+          </UserMenu>
         </div>
       </div>
     </nav>
