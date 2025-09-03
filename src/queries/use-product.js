@@ -7,7 +7,6 @@ export default function useProduct(id) {
     queryFn: async () => {
       try {
         const response = await apiClient.get(`/products/${id}`);
-        console.log(response.data);
         return response.data;
       } catch (error) {
         throw new Error(

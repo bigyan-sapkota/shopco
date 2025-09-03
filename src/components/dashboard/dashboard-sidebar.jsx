@@ -1,28 +1,42 @@
-import { useState } from "react";
-import { FaHome, FaUsers, FaChartBar, FaCog } from "react-icons/fa";
+import { NavLink } from "react-router-dom";
+import { FaHome, FaListUl } from "react-icons/fa";
 
 const menuItems = [
-  { id: 1, label: "Products", icon: <FaHome size={16} />, path: "/home" },
+  { id: 1, label: "Home", icon: <FaHome size={16} />, path: "/dashboard" },
+  {
+    id: 2,
+    label: "Products",
+    icon: <FaListUl size={16} />,
+    path: "/dashboard/products",
+  },
 ];
 
 export default function DashboardSidebar() {
-  const [active, setActive] = useState(1);
-
   return (
     <aside className="flex h-screen w-60 flex-col border-r border-gray-200 bg-white text-black">
+      {/* Logo / Title */}
       <div className="flex h-16 items-center justify-center border-b border-gray-200 px-6">
         <h3 className="font-bold">SHOP.CO</h3>
       </div>
-      <nav className="flex-1">
+
+      {/* Menu */}
+      <nav className="flex-1 py-4">
         {menuItems.map((item) => (
-          <div
+          <NavLink
             key={item.id}
-            onClick={() => setActive(item.id)}
-            className={`flex cursor-pointer items-center gap-3 px-6 py-3 transition-colors ${active === item.id ? "bg-gray-200 font-semibold" : "hover:bg-gray-100"} `}
+            to={item.path}
+            end
+            className={({ isActive }) =>
+              `flex items-center gap-3 px-6 py-3 transition-colors ${
+                isActive
+                  ? "bg-gray-200 font-semibold text-black"
+                  : "text-gray-600 hover:bg-gray-100 hover:text-black"
+              }`
+            }
           >
             {item.icon}
             <span>{item.label}</span>
-          </div>
+          </NavLink>
         ))}
       </nav>
     </aside>

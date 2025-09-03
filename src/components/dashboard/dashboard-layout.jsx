@@ -1,7 +1,8 @@
+import { Outlet } from "react-router-dom";
 import DashboardHeader from "./dashboard-header";
 import DashboardSidebar from "./dashboard-sidebar";
 
-export default function DashboardLayout({ children, title }) {
+export default function DashboardLayout({ title }) {
   return (
     <div className="flex h-screen">
       {/* Sidebar */}
@@ -15,7 +16,7 @@ export default function DashboardLayout({ children, title }) {
         {/* Page content */}
         <main className="flex-1 overflow-y-auto px-6 py-2">
           <h5 className="mt-2">{title}</h5>
-          {children}
+          <Outlet />
         </main>
       </div>
     </div>
