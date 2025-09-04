@@ -6,8 +6,13 @@ import { useRegisterUser } from "../mutations/use-register";
 import { registrationSchema } from "../schemas/registration-form-schema";
 
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { useProfile } from "../queries/use-profile";
+import { useNavigate } from "react-router-dom";
 
 export default function RegisterPage() {
+  const { data } = useProfile();
+  const navigate = useNavigate();
+
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   const {
@@ -19,6 +24,10 @@ export default function RegisterPage() {
   });
 
   const { mutate, isLoading } = useRegisterUser();
+
+  if (data) {
+    navigate("/");
+  }
 
   const togglePasswordVisibility = () => {
     setIsPasswordVisible(!isPasswordVisible);

@@ -10,6 +10,8 @@ import DashboardLayout from "./components/dashboard/dashboard-layout";
 import AddProductPage from "./pages/dashboard/products/add-product-page";
 import UpdateProductPage from "./pages/dashboard/products/update-product-page";
 import DashboardProductPage from "./pages/dashboard/products/product-page";
+import ProtectedRoute from "./providers/protected-route-provider";
+import NotFoundPage from "./pages/not-found-page";
 
 export default function App() {
   const location = useLocation();
@@ -21,7 +23,14 @@ export default function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/products" element={<ProductsPage />} />
 
-        <Route path="/dashboard" element={<DashboardLayout />}>
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <DashboardLayout />
+            </ProtectedRoute>
+          }
+        >
           <Route index element={<DashboardHomePage />} />
           <Route path="products" element={<DashboardProductPage />} />
           <Route path="products/add" element={<AddProductPage />} />
@@ -31,6 +40,7 @@ export default function App() {
         <Route path="/products/:id" element={<ProductDetailsPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <Toaster />
       {!isDashboard && <Footer />}
