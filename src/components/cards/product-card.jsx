@@ -2,11 +2,15 @@ import { Badge } from "@mantine/core";
 
 import { Link } from "react-router-dom";
 import Stars from "../layouts/stars";
+import clsx from "clsx";
 
-export default function ProductCard({ product, i }) {
+export default function ProductCard({ product, i, className }) {
   return (
     <Link
-      className="custom-transition group w-full rounded-2xl hover:border-gray-400 hover:shadow-lg"
+      className={clsx(
+        "custom-transition group w-full rounded-2xl hover:border-gray-400 hover:shadow-lg",
+        className,
+      )}
       to={`/products/${product.id}`}
     >
       <img

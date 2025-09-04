@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { MdOutlineStar } from "react-icons/md";
 
-export default function Stars({ number, className }) {
+export default function Stars({ number = 3, className }) {
   const createArrayOfNumber = (number) => new Array(number).fill(" ");
 
   return (

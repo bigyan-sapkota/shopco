@@ -1,6 +1,6 @@
-import { Menu, Avatar, Text } from "@mantine/core";
+import { Avatar, Menu, Text } from "@mantine/core";
 import { useState } from "react";
-import { FaUser, FaEdit, FaSignOutAlt } from "react-icons/fa";
+import { FaEdit, FaSignOutAlt, FaUser } from "react-icons/fa";
 
 export default function DashboardHeader() {
   const [opened, setOpened] = useState(false);
@@ -9,7 +9,6 @@ export default function DashboardHeader() {
     <header className="flex h-16 items-center justify-between bg-white px-6 text-black shadow">
       <h4>Dashboard</h4>
 
-      {/* User avatar */}
       <Menu shadow="md" width={200} opened={opened} onChange={setOpened}>
         <Menu.Target>
           <div className="flex cursor-pointer items-center gap-2">

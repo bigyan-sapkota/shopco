@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Stars from "../components/layouts/stars";
 import useProduct from "../queries/use-product";
 import ProductReview from "../components/products/product-review";
+import { useProducts } from "../queries/use-products";
+import clsx from "clsx";
+import ProductCard from "../components/cards/product-card";
 
 const tabList = [
   { value: "product-details", text: "Product Details" },
@@ -13,13 +16,35 @@ const tabList = [
 
 export default function ProductDetailsPage() {
   const [isActiveTab, setIsActiveTab] = useState("product-details");
-  const { data } = useProduct("suqj3dnekjqhwb64idppql09");
+  const { id } = useParams();
+
+  const { data, isLoading, isError } = useProduct(id || "");
+
+  const {
+    data: allProducts,
+    isLoading: isProductsLoading,
+    isError: isProductsError,
+  } = useProducts();
 
   const product = data?.product;
+  const allProductsData = allProducts?.products;
+
+  if (isLoading || isProductsLoading) {
+    return <h1>Loading...</h1>;
+  }
+
+  if (isError || isProductsError) {
+    return <h1>Error loading data..</h1>;
+  }
 
   if (!product) {
     return null;
   }
+
+  const relatedProductWithSameCategory = allProductsData
+    ?.filter((item) => item.id !== product.id)
+    .filter((item) => item.category === product.category)
+    .splice(0, 4);
 
   return (
     <main className="max-width padding-x padding-y">
@@ -80,7 +105,31 @@ export default function ProductDetailsPage() {
       </div>
 
       {/* more products */}
-      <div></div>
+      <div className="mt-6">
+        {/* heading */}
+        <div className="flex items-center gap-3">
+          <div
+            className={clsx(
+              "h-8 w-2",
+              product.category === "vegetables"
+                ? "bg-green-500"
+                : "bg-orange-600",
+            )}
+          ></div>
+          <h4>Related Products</h4>
+        </div>
+
+        {/* cards */}
+        <div className="mt-4 flex items-center justify-between gap-6">
+          {relatedProductWithSameCategory.map((product) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+              className="border border-gray-50 hover:border-transparent"
+            />
+          ))}
+        </div>
+      </div>
     </main>
   );
 }
