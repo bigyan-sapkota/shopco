@@ -18,7 +18,7 @@ export default function ProductDetailsPage() {
   const [isActiveTab, setIsActiveTab] = useState("product-details");
   const { id } = useParams();
 
-  const { data, isLoading, isError } = useProduct(id || "");
+  const { data, isLoading, isError } = useProduct(id);
 
   const {
     data: allProducts,

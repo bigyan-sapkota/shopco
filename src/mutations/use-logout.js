@@ -2,6 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { apiClient } from "../libs/api-client";
 import { getQueryClient } from "../libs/query-client";
 import { profileKey } from "../queries/use-profile";
+import { toast } from "sonner";
 
 export const logoutKey = ["logout"];
 
@@ -22,7 +23,14 @@ export default function useLogout() {
     mutationKey: logoutKey,
     mutationFn: logoutUser,
 
+    onMutate: () => {
+      toast.dismiss();
+      toast.loading("Logging out!");
+    },
+
     onSuccess: () => {
+      toast.dismiss();
+      toast.loading("Logged out successfully!");
       queryClient.setQueryData(profileKey, null);
       queryClient.clear();
     },

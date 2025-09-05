@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import { apiClient } from "../libs/api-client";
 import { getQueryClient } from "../libs/query-client";
 import { getProductsKey } from "../queries/use-products";
+import ProductDetailsPage from "../pages/product-details-page";
 
 export const updateProductKey = (id) => ["update-product", id];
 

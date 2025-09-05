@@ -11,6 +11,7 @@ export const registerUserKey = ["register-user"];
 export const useRegisterUser = () => {
   const queryClient = getQueryClient();
   const navigate = useNavigate();
+
   return useMutation({
     mutationKey: registerUserKey,
     mutationFn: (data) => registerUser(data),
