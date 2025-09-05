@@ -2,10 +2,15 @@ import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { apiClient } from "../libs/api-client";
 import { uploadImageToImageBb } from "../libs/utils";
+import { getQueryClient } from "../libs/query-client";
+import { profileKey } from "../queries/use-profile";
+import { useNavigate } from "react-router-dom";
 
 export const registerUserKey = ["register-user"];
 
 export const useRegisterUser = () => {
+  const queryClient = getQueryClient();
+  const navigate = useNavigate();
   return useMutation({
     mutationKey: registerUserKey,
     mutationFn: (data) => registerUser(data),
@@ -15,9 +20,11 @@ export const useRegisterUser = () => {
       toast.loading("Registering user...");
     },
 
-    onSuccess() {
+    onSuccess(data) {
       toast.dismiss();
       toast.success("User registered successfully!");
+      queryClient.setQueryData(profileKey, data);
+      navigate("/");
     },
 
     onError(error) {

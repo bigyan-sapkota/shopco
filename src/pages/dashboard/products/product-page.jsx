@@ -1,5 +1,4 @@
 import {
-  Avatar,
   Badge,
   Button,
   Group,
@@ -21,12 +20,10 @@ import {
   FaTrash,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { DashboardBreadCrumbs } from "../../../components/dashboard/dashboard-breadcrumb";
 import { useDebounce } from "../../../hooks/use-debounce";
 import { useProducts } from "../../../queries/use-products";
-import DashboardHeader from "../../../components/dashboard/dashboard-header";
-import { DashboardBreadCrumbs } from "../../../components/dashboard/dashboard-breadcrumb";
 
-// Main Product Page Component
 export default function DashboardProductPage() {
   const [cursor, setCursor] = useState(undefined);
   const [cursorHistory, setCursorHistory] = useState([undefined]);
@@ -85,51 +82,53 @@ export default function DashboardProductPage() {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       <DashboardBreadCrumbs />
 
-      <section className="p-6">
+      <section className="mt-4">
         <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <h1 className="text-2xl font-bold">Products</h1>
-
-          <div className="flex gap-2">
-            <Button
-              variant={showFilters ? "filled" : "outline"}
-              leftSection={<FaFilter />}
-              onClick={() => setShowFilters(!showFilters)}
-            >
-              Filters{" "}
-              {hasActiveFilters && (
-                <Badge ml={5} circle>
-                  {
-                    Object.values(filters).filter((v) => v && v !== "recent")
-                      .length
-                  }
-                </Badge>
-              )}
-            </Button>
-
-            {hasActiveFilters && (
-              <Button
-                variant="subtle"
-                onClick={resetFilters}
-                rightSection={<FaTimes />}
-              >
-                Clear
-              </Button>
-            )}
-          </div>
+          <h1 className="text-2xl font-bold">Products List</h1>
         </div>
 
         {/* Search and Filters */}
-        <div className="mb-6 rounded-lg bg-white p-4 shadow">
-          <TextInput
-            placeholder="Search products by title, description, or owner..."
-            icon={<FaSearch />}
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="mb-4"
-          />
+        <div className="mb-6 rounded-lg bg-white">
+          <div className="flex justify-between gap-8">
+            <TextInput
+              placeholder="Search products by title, description, or owner..."
+              icon={<FaSearch />}
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="mb-4 w-full"
+            />
+
+            <div className="flex gap-2">
+              <Button
+                variant={showFilters ? "filled" : "outline"}
+                leftSection={<FaFilter />}
+                onClick={() => setShowFilters(!showFilters)}
+              >
+                Filters
+                {hasActiveFilters && (
+                  <Badge ml={5} circle>
+                    {
+                      Object.values(filters).filter((v) => v && v !== "recent")
+                        .length
+                    }
+                  </Badge>
+                )}
+              </Button>
+
+              {hasActiveFilters && (
+                <Button
+                  variant="subtle"
+                  onClick={resetFilters}
+                  rightSection={<FaTimes />}
+                >
+                  Clear
+                </Button>
+              )}
+            </div>
+          </div>
 
           {showFilters && (
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -141,8 +140,6 @@ export default function DashboardProductPage() {
                 data={[
                   { value: "fruits", label: "Fruits" },
                   { value: "vegetables", label: "Vegetables" },
-                  { value: "dairy", label: "Dairy" },
-                  { value: "meat", label: "Meat" },
                 ]}
                 clearable
               />
@@ -191,7 +188,7 @@ export default function DashboardProductPage() {
 
         {/* Table */}
         <div className="relative rounded-lg bg-white shadow-lg">
-          <LoadingOverlay visible={isLoading} overlayBlur={2} />
+          <LoadingOverlay visible={isLoading} />
 
           <ScrollArea>
             <Table highlightOnHover striped verticalSpacing="sm">
@@ -200,7 +197,6 @@ export default function DashboardProductPage() {
                   <th className="px-6 py-3 text-left">Title</th>
                   <th className="px-6 py-3 text-left">Image</th>
                   <th className="px-6 py-3 text-left">Category</th>
-                  <th className="px-6 py-3 text-left">Stock</th>
                   <th className="px-6 py-3 text-left">Price</th>
                   <th className="px-6 py-3 text-left">Actions</th>
                 </tr>
@@ -211,6 +207,30 @@ export default function DashboardProductPage() {
                     <tr key={element.id} className="border-b last:border-b-0">
                       <td className="px-6 py-4">
                         <p className="max-w-xs font-medium">{element.title}</p>
+                        <div className="mt-2 flex items-center gap-2">
+                          {/* avatar */}
+                          <div>
+                            {element.owner.image ? (
+                              <img
+                                src={element.owner.image}
+                                alt="avatar"
+                                className="size-4 rounded-full object-cover"
+                              />
+                            ) : (
+                              <span className="flex size-5 items-center justify-center rounded-full bg-gray-500 p-0.5 text-xs font-medium text-white">
+                                {element.owner.name
+                                  .split(" ")
+                                  .map((n) => n[0])
+                                  .join("")}
+                              </span>
+                            )}
+                          </div>
+
+                          {/* name */}
+                          <p className="text-sm text-gray-500">
+                            {element.owner.name}
+                          </p>
+                        </div>
                       </td>
                       <td className="px-6 py-4">
                         <img
@@ -222,21 +242,10 @@ export default function DashboardProductPage() {
                       <td className="px-6 py-4">
                         <Badge
                           color={
-                            element.category === "fruits"
-                              ? "orange"
-                              : element.category === "vegetables"
-                                ? "green"
-                                : element.category === "dairy"
-                                  ? "blue"
-                                  : "red"
+                            element.category === "fruits" ? "orange" : "green"
                           }
                         >
                           {element.category}
-                        </Badge>
-                      </td>
-                      <td className="px-6 py-4">
-                        <Badge color={element.stock > 10 ? "green" : "red"}>
-                          {element.stock} in stock
                         </Badge>
                       </td>
 
@@ -244,7 +253,7 @@ export default function DashboardProductPage() {
                         NPR {element.price}
                         {element.discount > 0 && (
                           <Text size="xs" color="dimmed" td="line-through">
-                            NPR{" "}
+                            NPR
                             {Math.round(
                               element.price * (1 + element.discount / 100),
                             )}
